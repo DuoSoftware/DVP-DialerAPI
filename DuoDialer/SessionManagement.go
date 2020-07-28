@@ -141,9 +141,12 @@ func ManageIntegrationData(sessionInfo map[string]string, integrationType string
 		}
 		integrationUrl = intData.Customer.Url
 		dcReason = sessionInfo["ReasonCode"]
+		
+		cyanblue.Println(fmt.Sprintf("=============CURRENT REASON CUST : %s - dcReason : %s", bodyData["Reason"], dcReason))
 
 		if dcReason == "" {
 			dcReason = sessionInfo["Reason"]
+			cyanblue.Println(fmt.Sprintf("=============SETTING REASON CUST : %s", dcReason))
 		}
 
 	} else if integrationType == "AGENT" {
@@ -158,6 +161,7 @@ func ManageIntegrationData(sessionInfo map[string]string, integrationType string
 		dcReason = sessionInfo["AgentReasonCode"]
 		if dcReason == "" {
 			dcReason = sessionInfo["AgentReason"]
+			cyanblue.Println(fmt.Sprintf("=============SETTING REASON AGENT : %s", dcReason))
 		}
 		integrationUrl = intData.Agent.Url
 
@@ -167,7 +171,10 @@ func ManageIntegrationData(sessionInfo map[string]string, integrationType string
 
 		if disconnectReasonMap[dcReason] != "" {
 			bodyData["Reason"] = disconnectReasonMap[dcReason]
+			cyanblue.Println(fmt.Sprintf("=============NEW MAPPED REASON : %s", bodyData["Reason"]))
 		}
+		
+		cyanblue.Println(fmt.Sprintf("=============LAST RESOLVED REASON : %s", bodyData["Reason"]))
 
 		jsonData, _ := json.Marshal(bodyData)
 
