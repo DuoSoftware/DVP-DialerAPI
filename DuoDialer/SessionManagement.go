@@ -181,7 +181,7 @@ func ManageIntegrationData(sessionInfo map[string]string, integrationType string
 		strdata := string(jsonData)
 
 		cyanblue.Println(fmt.Sprintf("=============SENDING INTEGRATION DATA - URL : %s, Data : %s", integrationUrl, strdata))
-
+        cyanblue.Println(fmt.Sprintf("=============SENDING INTEGRATION DATA REPEAT- URL : %s, Data : %s", integrationUrl, strdata))
 		req, err := http.NewRequest("POST", integrationUrl, bytes.NewBuffer(jsonData))
 		req.Header.Set("Content-Type", "application/json")
 		client := &http.Client{}
