@@ -128,6 +128,7 @@ func OnEvent(eventInfo SubEvents) {
 func OnEventAgent(eventInfo SubEvents) {
 	redGreen := color.New(color.FgRed).Add(color.BgGreen)
 	defEventAgent := SubEvents{}
+	//fmt.Printf("Event received %+v", eventInfo)
 	if eventInfo != defEventAgent {
 		if eventInfo.TenantId != "" && eventInfo.CompanyId != "" {
 			switch eventInfo.EventName {

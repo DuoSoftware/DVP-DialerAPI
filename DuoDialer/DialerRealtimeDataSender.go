@@ -1,11 +1,11 @@
 package main
 
 import (
-	"strconv"
 	"fmt"
+	"strconv"
+
 	"github.com/fatih/color"
 )
-
 
 func AddCampaignDataRealtime(campaignData Campaign) {
 	color.Cyan(fmt.Sprintf("Adding Campaign Realtime Data"))
@@ -26,7 +26,7 @@ func AddCampaignDataRealtime(campaignData Campaign) {
 	RedisHMSet(key, campInfoRealTime)
 
 	go SendNotificationToRoom("DIALER:RealTimeCampaignEvents", "DIALER", "STATELESS", campInfoRealTime, "NEW_CAMPAIGN", campaignData.CompanyId, campaignData.TenantId)
-	
+
 }
 
 func AddCampaignCallsRealtime(PhoneNumber, TryCount, DialState, TenantId, CompanyId, CampaignId, SessionId string) {
@@ -49,7 +49,7 @@ func AddCampaignCallsRealtime(PhoneNumber, TryCount, DialState, TenantId, Compan
 	tenantIdInt, _ := strconv.Atoi(TenantId)
 
 	go SendNotificationToRoom("DIALER:RealTimeCampaignEvents", "DIALER", "STATELESS", campCallRealTime, "NEW_CAMPAIGN_CALL", companyIdInt, tenantIdInt)
-	
+
 }
 
 func UpdateCampaignRealtimeField(fieldName, val string, tenantId, companyId, campaignId int) {
@@ -57,11 +57,11 @@ func UpdateCampaignRealtimeField(fieldName, val string, tenantId, companyId, cam
 
 	key := fmt.Sprintf("RealTimeCampaign:%d:%d:%d", tenantId, companyId, campaignId)
 
-	if(fieldName == "OperationalStatus"){
+	if fieldName == "OperationalStatus" {
 		//check current value and update
 		existingField := RedisHashGetField(key, fieldName)
 
-		if(existingField != val){
+		if existingField != val {
 			RedisHashSetField(key, fieldName, val)
 
 			campInfoRealTime := make(map[string]string)
@@ -74,7 +74,6 @@ func UpdateCampaignRealtimeField(fieldName, val string, tenantId, companyId, cam
 		}
 	}
 
-	
 }
 
 func UpdateCampaignCallRealtimeField(fieldName, val, tenantId, companyId, campaignId, sessionId string) {
@@ -94,7 +93,6 @@ func UpdateCampaignCallRealtimeField(fieldName, val, tenantId, companyId, campai
 
 	go SendNotificationToRoom("DIALER:RealTimeCampaignEvents", "DIALER", "STATELESS", campCallInfoRealTime, "UPDATE_CAMPAIGN_CALL", companyIdInt, tenantIdInt)
 
-	
 }
 
 func RemoveCampaignRealtime(tenantId, companyId, campaignId int) {
@@ -109,7 +107,7 @@ func RemoveCampaignRealtime(tenantId, companyId, campaignId int) {
 	campInfoRealTime["CampaignId"] = strconv.Itoa(campaignId)
 
 	go SendNotificationToRoom("DIALER:RealTimeCampaignEvents", "DIALER", "STATELESS", campInfoRealTime, "REMOVE_CAMPAIGN", companyId, tenantId)
-	
+
 }
 
 func RemoveCampaignCallRealtime(tenantId, companyId, campaignId, sessionId string) {
@@ -127,5 +125,5 @@ func RemoveCampaignCallRealtime(tenantId, companyId, campaignId, sessionId strin
 	tenantIdInt, _ := strconv.Atoi(tenantId)
 
 	go SendNotificationToRoom("DIALER:RealTimeCampaignEvents", "DIALER", "STATELESS", campCallInfoRealTime, "REMOVE_CAMPAIGN_CALL", companyIdInt, tenantIdInt)
-	
+
 }
