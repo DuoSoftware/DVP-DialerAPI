@@ -19,7 +19,8 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -o main ./DuoDialer/
+#RUN go build -o main ./DuoDialer/
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main ./DuoDialer/
 
 # Expose port 8080 to the outside world
 EXPOSE 8835
