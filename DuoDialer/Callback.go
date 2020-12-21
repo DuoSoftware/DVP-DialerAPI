@@ -340,7 +340,7 @@ func SetNextContact(contactsList []Contact, sessionInfo map[string]string) {
 
 	isdisconnectReasonAllowed, _ := ValidateDisconnectReason(sessionInfo["Reason"])
 
-	DialerLog(fmt.Sprintf("Disconnection reason is : %s", sessionInfo["Reason"]))
+	magentawhite.Println(fmt.Sprintf("Disconnection reason is : %s", sessionInfo["Reason"]))
 
 	if isdisconnectReasonAllowed {
 		if contactsList != nil && len(contactsList) > 0 {
