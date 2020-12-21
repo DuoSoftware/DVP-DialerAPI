@@ -134,6 +134,7 @@ func AddInitialCampaignsToRealtimeList() {
 
 func main() {
 
+	color.Blue("LOLC multiple contact check")
 	//Innitiate configuration
 	InitiateDuoDialer()
 
