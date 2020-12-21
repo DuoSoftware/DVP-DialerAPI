@@ -339,6 +339,7 @@ func SetNextContact(contactsList []Contact, sessionInfo map[string]string) {
 	magentawhite := color.New(color.FgMagenta).Add(color.BgWhite)
 
 	isdisconnectReasonAllowed, _ := ValidateDisconnectReason(sessionInfo["Reason"])
+	magentawhite.Println("Checking flow ....")
 
 	magentawhite.Println(fmt.Sprintf("Disconnection reason is : %s", sessionInfo["Reason"]))
 
