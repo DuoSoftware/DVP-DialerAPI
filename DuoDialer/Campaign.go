@@ -683,7 +683,7 @@ func StartCampaign(campaignId, campaignName, dialoutMec, CampaignChannel, camCla
 								return
 							}
 						} else {
-							uuidV4, _ := uuid.NewV4()
+							uuidV4 := uuid.NewV4()
 							sessionId := uuidV4.String()
 							emailData := make(map[string]interface{})
 
@@ -765,7 +765,7 @@ func StartCampaign(campaignId, campaignName, dialoutMec, CampaignChannel, camCla
 							}
 						} else {
 							color.Yellow(fmt.Sprintf("=============== SMS DIALING - Number Found : %s ====================", number))
-							uuidV4, _ := uuid.NewV4()
+							uuidV4 := uuid.NewV4()
 							sessionId := uuidV4.String()
 							smsData := make(map[string]interface{})
 
