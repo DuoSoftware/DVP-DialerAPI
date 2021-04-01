@@ -1,0 +1,16 @@
+{
+	"DisconnectReasons":[
+		{
+			"Reason":"NO_ANSWER",
+			"Values":["NO_ANSWER", "SUBSCRIBER_ABSENT", "NO_USER_RESPONSE"]
+		},
+		{
+			"Reason":"BUSY",
+			"Values":["USER_BUSY","CALL_REJECTED"]
+		},
+		{
+			"Reason":"INVALIED_DESTINATION",
+			"Values":["UNSPECIFIED", "UNALLOCATED_NUMBER"]
+		}
+	]
+}
